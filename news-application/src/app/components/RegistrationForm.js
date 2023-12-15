@@ -17,9 +17,18 @@ const RegistrationForm = () => {
       return;
     }
     try {
-      // Call register API function
-      const response = await register({ email, password });
-      console.log(response); // Handle response accordingly (redirect, show message, etc.)
+      const response = await axios.post('http://localhost:5000/api/auth/register', {
+        firstname:firstname,
+        lastname:lastname,
+        email: email,
+        password: password,
+      });
+
+      //navigate the login page
+      if(response.statusCode==200) {
+        history.push('/login');
+      }
+
     } catch (error) {
       console.error('Registration error:', error);
     }
